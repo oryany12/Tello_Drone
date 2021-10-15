@@ -1,7 +1,7 @@
 from djitellopy import tello
 import KeyPressModule as kp
 import cv2
-from time import sleep
+import time
 
 kp.init()
 
@@ -9,6 +9,8 @@ me = tello.Tello()
 me.connect()
 me.streamon()
 print(me.get_battery())
+
+global img
 
 
 def getKeyboardInput():
@@ -35,10 +37,13 @@ def getKeyboardInput():
     elif kp.getKey("d"):
         yv = speed
 
-    if kp.getKey("q"): me.land()
+    if kp.getKey("q"): me.land(); time.sleep(3)
     if kp.getKey("e"): me.takeoff()
 
     if kp.getKey("f"): me.flip("f")
+
+    if kp.getKey("z"): me.flip("f")
+    cv2.imwrite(f'Resources/Images/{time.time()}.jpg',img)
 
     return [lr, fb, ud, yv]
 
