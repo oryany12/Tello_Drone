@@ -11,7 +11,8 @@ me.streamon()
 print(me.get_battery())
 
 global img
-
+global lst_tm
+lst_tm=time.time()
 
 def getKeyboardInput():
     lr, fb, ud, yv = 0, 0, 0, 0
@@ -42,9 +43,12 @@ def getKeyboardInput():
 
     if kp.getKey("f"): me.flip("f")
 
-    if kp.getKey("z"): me.flip("f")
-    cv2.imwrite(f'Resources/Images/{time.time()}.jpg',img)
-
+    if kp.getKey("z"): #can take 1 pic per 1 sec
+        cur_tm = time.time()
+        global lst_tm
+        if cur_tm - lst_tm > 1:
+            cv2.imwrite(f'Resources/Images/{time.time()}.jpg', img)
+            lst_tm = cur_tm
     return [lr, fb, ud, yv]
 
 

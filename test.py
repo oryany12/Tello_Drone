@@ -1,20 +1,10 @@
-from djitellopy import tello
-import cv2
-import pygame
-from time import sleep
+import time
 
-me = tello.Tello()
-me.connect()
-print(me.get_battery())
-
-# me.takeoff()
-# sleep(4)
-# me.land()
-
-me.streamon()
-
+t1 = time.time()
+print(t1)
 while True:
-    img = me.get_frame_read().frame
-    img = cv2.resize(img,(360,240))
-    cv2.imshow("Image",img)
-    cv2.waitKey(1)
+    t2 = time.time()
+    if t2-t1 >1:
+        print(t2)
+        print(t2-t1)
+        break
