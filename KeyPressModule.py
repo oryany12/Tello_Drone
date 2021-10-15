@@ -15,13 +15,3 @@ def getKey(KeyName):
         ans = True
     pygame.display.update()
     return ans
-
-
-def main():
-    print(getKey('a'))
-
-
-if __name__ == '__main__':
-    init()
-    while True:
-        main()
