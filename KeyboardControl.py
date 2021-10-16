@@ -51,7 +51,7 @@ def getKeyboardInput():
         else:
             print("Cant Flip, Battery below 50%, Current Battery {}%.".format(me.get_battery()))
 
-    if kp.getKey("x"): me.land(); time.sleep(3); me.streamoff(); end=1
+    if kp.getKey("x"): me.land(); time.sleep(3); end=1
 
 
     if kp.getKey("z"):  # can take 1 pic per 1 sec
@@ -74,5 +74,6 @@ while True:
     cv2.imshow("Image", img)
     cv2.waitKey(1)
 
+me.streamoff()
 cv2.destroyWindow("Image")
 winwifi.WinWiFi.connect("Diralhaskir")
