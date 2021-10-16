@@ -12,7 +12,8 @@ print(me.get_battery())
 
 global img
 global lst_tm
-lst_tm=time.time()
+lst_tm = time.time()
+
 
 def getKeyboardInput():
     lr, fb, ud, yv = 0, 0, 0, 0
@@ -43,7 +44,7 @@ def getKeyboardInput():
 
     if kp.getKey("f"): me.flip("f")
 
-    if kp.getKey("z"): #can take 1 pic per 1 sec
+    if kp.getKey("z"):  # can take 1 pic per 1 sec
         cur_tm = time.time()
         global lst_tm
         if cur_tm - lst_tm > 1:
