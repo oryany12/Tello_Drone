@@ -6,7 +6,6 @@ import winwifi
 
 winwifi.WinWiFi.connect("TELLO-60679B")
 
-
 kp.init()
 me = tello.Tello()
 me.connect()

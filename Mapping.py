@@ -87,4 +87,4 @@ while True:
 
 me.streamoff()
 cv2.destroyWindow("Image")
-winwifi.WinWiFi.connect("Diralhaskir")
+# winwifi.WinWiFi.connect("Diralhaskir")
