@@ -13,8 +13,8 @@ me.streamon()
 print(me.get_battery())
 
 global img
-global lst_tm
-lst_tm = time.time()
+global lst_tm_img
+lst_tm_img = time.time()
 
 
 def getKeyboardInput():
@@ -55,10 +55,10 @@ def getKeyboardInput():
 
     if kp.getKey("z"):  # can take 1 pic per 1 sec
         cur_tm = time.time()
-        global lst_tm
-        if cur_tm - lst_tm > 1:
+        global lst_tm_img
+        if cur_tm - lst_tm_img > 1:
             cv2.imwrite(f'Resources/Images/{time.time()}.jpg', img)
-            lst_tm = cur_tm
+            lst_tm_img = cur_tm
     return [lr, fb, ud, yv, end]
 
 
@@ -75,4 +75,6 @@ while True:
 
 me.streamoff()
 cv2.destroyWindow("Image")
-winwifi.WinWiFi.connect("Diralhaskir")
+# winwifi.WinWiFi.connect("Diralhaskir")
+winwifi.WinWiFi.connect("yehezkel")
+

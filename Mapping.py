@@ -1,5 +1,6 @@
 from djitellopy import tello
 import KeyPressModule as kp
+from KeyboardControl import *
 import cv2
 import time
 import winwifi
@@ -25,8 +26,8 @@ me.streamon()
 print(me.get_battery())
 
 global img
-global lst_tm
-lst_tm = time.time()
+global lst_tm_img
+lst_tm_img = time.time()
 
 
 def getKeyboardInput():
@@ -58,12 +59,12 @@ def getKeyboardInput():
 
     if kp.getKey("f"):
         if me.get_battery() > 50:
-            me.flip("f"); time.sleep(1)
+            me.flip("f");
+            time.sleep(1)
         else:
             print("Cant Flip, Battery below 50%, Current Battery {}%.".format(me.get_battery()))
 
-    if kp.getKey("x"): me.land(); time.sleep(3); end=1
-
+    if kp.getKey("x"): me.land(); time.sleep(3); end = 1
 
     if kp.getKey("z"):  # can take 1 pic per 1 sec
         cur_tm = time.time()
@@ -72,6 +73,10 @@ def getKeyboardInput():
             cv2.imwrite(f'Resources/Images/{time.time()}.jpg', img)
             lst_tm = cur_tm
     return [lr, fb, ud, yv, end]
+
+
+def drawPoints():
+    cv2.circle(img, (300, 500), 20, (0, 0, 255), cv2.FILLED)
 
 
 while True:
@@ -88,3 +93,4 @@ while True:
 me.streamoff()
 cv2.destroyWindow("Image")
 # winwifi.WinWiFi.connect("Diralhaskir")
+winwifi.WinWiFi.connect("yehezkel")
