@@ -1,0 +1,7 @@
+TELLO_WIFI = "TELLO-60679B"
+HOME_WIFI = "Diralselno"
+SPEED = 50
+MIN_BATTERY_FLIP = 50
+
+STREAM_VIDEO, STREAM_NAME = True, "Stream Video"
+SHOW_MAP = False

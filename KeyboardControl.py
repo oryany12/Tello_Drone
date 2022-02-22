@@ -1,80 +1,35 @@
-from djitellopy import tello
 import KeyPressModule as kp
-import cv2
-import time
-import winwifi
-
-winwifi.WinWiFi.connect("TELLO-60679B")
+from Global_params import *
 
 kp.init()
-me = tello.Tello()
-me.connect()
-me.streamon()
-print(me.get_battery())
-
-global img
-global lst_tm_img
-lst_tm_img = time.time()
-
-
 def getKeyboardInput():
-    lr, fb, ud, yv, end = 0, 0, 0, 0, 0
-    speed = 50
+    lr, fb, ud, yv, key_press = 0, 0, 0, 0, None
 
     if kp.getKey("LEFT"):
-        lr = -speed
+        lr = -SPEED
     elif kp.getKey("RIGHT"):
-        lr = speed
+        lr = SPEED
 
     if kp.getKey("UP"):
-        fb = speed
+        fb = SPEED
     elif kp.getKey("DOWN"):
-        fb = -speed
+        fb = -SPEED
 
     if kp.getKey("w"):
-        ud = speed
+        ud = SPEED
     elif kp.getKey("s"):
-        ud = -speed
+        ud = -SPEED
 
     if kp.getKey("a"):
-        yv = -speed
+        yv = -SPEED
     elif kp.getKey("d"):
-        yv = speed
+        yv = SPEED
 
-    if kp.getKey("q"): me.land(); time.sleep(3);
-    if kp.getKey("e"): me.takeoff()
+    if kp.getKey("q"): key_press = "q"
+    if kp.getKey("e"): key_press = "e"
+    if kp.getKey("f"): key_press = "f"
+    if kp.getKey("x"): key_press = "x"
+    if kp.getKey("z"): key_press = "z"
 
-    if kp.getKey("f"):
-        if me.get_battery() > 50:
-            me.flip("f"); time.sleep(1)
-        else:
-            print("Cant Flip, Battery below 50%, Current Battery {}%.".format(me.get_battery()))
-
-    if kp.getKey("x"): me.land(); time.sleep(3); end=1
-
-
-    if kp.getKey("z"):  # can take 1 pic per 1 sec
-        cur_tm = time.time()
-        global lst_tm_img
-        if cur_tm - lst_tm_img > 1:
-            cv2.imwrite(f'Resources/Images/{time.time()}.jpg', img)
-            lst_tm_img = cur_tm
-    return [lr, fb, ud, yv, end]
-
-
-while True:
-    vals = getKeyboardInput()
-    if vals[4] == 1:
-        break
-    me.send_rc_control(vals[0], vals[1], vals[2], vals[3])
-
-    img = me.get_frame_read().frame
-    img = cv2.resize(img, (360, 240))
-    cv2.imshow("Image", img)
-    cv2.waitKey(1)
-
-me.streamoff()
-cv2.destroyWindow("Image")
-# winwifi.WinWiFi.connect("Diralhaskir")
-winwifi.WinWiFi.connect("yehezkel")
+    return key_press, [lr, fb, ud, yv]
 
