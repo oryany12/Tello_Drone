@@ -1,9 +1,10 @@
 import pygame
+from Global_params import *
 
 
 def init():
     pygame.init()
-    win = pygame.display.set_mode((400, 400))
+    win = pygame.display.set_mode(GAME_PAD_SIZE)
 
 
 def getKey(KeyName):
