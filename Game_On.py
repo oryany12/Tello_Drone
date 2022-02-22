@@ -65,7 +65,7 @@ while True:
     if "r" in key_press:
         if SHOW_MAP:
             map_obj.x, map_obj.y = map_obj.x_start, map_obj.y_start
-            map_obj.Points = [(map_obj.x, map_obj.y)]
+            map_obj.Points = [(map_obj.x, map_obj.y)]*TRAIL
             map_obj.a = map_obj.yaw = 0
 
 me.end()

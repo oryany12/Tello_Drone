@@ -13,18 +13,23 @@ SHOW_MAP = True
 MAP_SIZE = (1000, 1000, 3)
 MAP_NAME = "Map"
 
-TRAIL = 15  # points
-RADIUS_POINT = 5
-COLOR_POINT = (0, 0, 255)
-RADIUS_LEAD_POINT = 8
-COLOR_LEAD_POINT = (0, 255, 0)
-COLOR_TEXT = (255, 0, 255)
+INTERVAL = 0.1  # second
 
 ### MAPPING ###
 fSpeed = 15  # 15cm/s
 aSpeed = 50  # 50degrees/s
 zSpeed = 50
-INTERVAL = 0.1  # second
 
 dInterval = fSpeed * INTERVAL
 aInterval = aSpeed * INTERVAL
+
+
+TRAIL = 200  # points
+RADIUS_POINT = 5
+COLOR_POINT = (0, 0, 255)
+RADIUS_LEAD_POINT = 8
+COLOR_LEAD_POINT = (0, 255, 0)
+COLOR_TEXT = (255, 0, 255)
+RADIUS_ORIGIN_POINT = 6
+COLOR_ORIGIN_POINT = (142, 142, 142)
+

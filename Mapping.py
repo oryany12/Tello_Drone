@@ -10,18 +10,20 @@ class Map:
         self.x_start, self.y_start = MAP_SIZE[0] // 2, MAP_SIZE[1] // 2
         self.a = 0  # angle
         self.yaw = 0
-        self.Points = [(self.x, self.y)]
+        self.Points = [(self.x, self.y)]*TRAIL
+        self.Points_colors = [tuple(map(lambda x: i*x/TRAIL, COLOR_POINT)) for i in range(TRAIL)]
 
     def drawPoints(self):
         map_img = np.zeros(MAP_SIZE, np.uint8)
-        for point in self.Points:
-            cv2.circle(map_img, point, RADIUS_POINT, COLOR_POINT, cv2.FILLED)
+        cv2.circle(map_img, (self.x_start, self.y_start), RADIUS_ORIGIN_POINT, COLOR_ORIGIN_POINT, cv2.FILLED)
+        for i, point in enumerate(self.Points):
+            color = self.Points_colors[i]
+            cv2.circle(map_img, point, RADIUS_POINT, color, cv2.FILLED)
         cv2.circle(map_img, self.Points[-1], RADIUS_LEAD_POINT, COLOR_LEAD_POINT, cv2.FILLED)
-        cv2.putText(map_img, f'({(self.Points[-1][0]-self.x_start) / 100},{(self.Points[-1][0]-self.y_start) / 100}m',
+        cv2.putText(map_img, f'({(self.Points[-1][0]-self.x_start) / 100},{(self.Points[-1][1]-self.y_start) / 100})m',
                     (self.Points[-1][0] + 10, self.Points[-1][1] + 30), cv2.FONT_HERSHEY_PLAIN, 1,
                     COLOR_TEXT, 1)
         return map_img
-    #TODO trail implementaion with fade trail
 
     def next_position(self, key_press):
         d = 0  # distance
@@ -51,3 +53,5 @@ class Map:
         self.y += int(d * math.sin(math.radians(self.a)))
         if self.Points[-1] != (self.x, self.y):
             self.Points.append((self.x, self.y))
+            self.Points.pop(0)
+
