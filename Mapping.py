@@ -21,7 +21,7 @@ class Map:
                     (self.Points[-1][0] + 10, self.Points[-1][1] + 30), cv2.FONT_HERSHEY_PLAIN, 1,
                     COLOR_TEXT, 1)
         return map_img
-    #TODO trail implementaion with fade trail
+    #TODO trail implementaion with fade trai
 
     def next_position(self, key_press):
         d = 0  # distance
