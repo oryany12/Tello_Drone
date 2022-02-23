@@ -4,7 +4,6 @@ from djitellopy import tello
 from KeyboardControl import getKeyboardInput
 import time
 import cv2
-import numpy as np
 from Mapping import Map
 
 ### SETUP ###
@@ -42,7 +41,9 @@ while True:
         map_img = map_obj.drawPoints()
         cv2.imshow(MAP_NAME, map_img)
         cv2.waitKey(1)
+
     time.sleep(INTERVAL)
+
     if "q" in key_press:
         me.land()
         time.sleep(3)

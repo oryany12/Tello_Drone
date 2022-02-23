@@ -16,13 +16,16 @@ class Map:
     def drawPoints(self):
         map_img = np.zeros(MAP_SIZE, np.uint8)
         cv2.circle(map_img, (self.x_start, self.y_start), RADIUS_ORIGIN_POINT, COLOR_ORIGIN_POINT, cv2.FILLED)
-        for i, point in enumerate(self.Points):
+        for i, point in enumerate(self.Points[-TRAIL:]):
             color = self.Points_colors[i]
-            cv2.circle(map_img, point, RADIUS_POINT, color, cv2.FILLED)
-        cv2.circle(map_img, self.Points[-1], RADIUS_LEAD_POINT, COLOR_LEAD_POINT, cv2.FILLED)
-        cv2.putText(map_img, f'({(self.Points[-1][0]-self.x_start) / 100},{(self.Points[-1][1]-self.y_start) / 100})m',
-                    (self.Points[-1][0] + 10, self.Points[-1][1] + 30), cv2.FONT_HERSHEY_PLAIN, 1,
-                    COLOR_TEXT, 1)
+            cv2.circle(map_img, (int(point[0]), int(point[1])), RADIUS_POINT, color, cv2.FILLED)
+        cv2.circle(map_img, (int(self.Points[-1][0]), int(self.Points[-1][1])),
+                   RADIUS_LEAD_POINT, COLOR_LEAD_POINT, cv2.FILLED)
+        x_cord = round((self.Points[-1][0]-self.x_start) / 100, 2)
+        y_cord = round((self.Points[-1][1]-self.y_start) / 100, 2)
+        cv2.putText(map_img, f'({x_cord},{y_cord})m',
+                    (int(self.Points[-1][0]) + 10, int(self.Points[-1][1]) + 30),
+                    cv2.FONT_HERSHEY_PLAIN, 1, COLOR_TEXT, 1)
         return map_img
 
     def next_position(self, key_press):
@@ -49,9 +52,8 @@ class Map:
             self.yaw += aInterval
 
         self.a += self.yaw
-        self.x += int(d * math.cos(math.radians(self.a)))
-        self.y += int(d * math.sin(math.radians(self.a)))
-        if self.Points[-1] != (self.x, self.y):
-            self.Points.append((self.x, self.y))
-            self.Points.pop(0)
+        self.x += d * math.cos(math.radians(self.a))
+        self.y += d * math.sin(math.radians(self.a))
+
+        self.Points.append((self.x, self.y))
 
