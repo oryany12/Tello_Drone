@@ -42,5 +42,6 @@ def getKeyboardInput():
     if kp.getKey("z"): key_press.add("z")
     if kp.getKey("b"): key_press.add("b")
     if kp.getKey("r"): key_press.add("r")
+    if kp.getKey("t"): key_press.add("t")
 
     return key_press, [lr, fb, ud, yv]
