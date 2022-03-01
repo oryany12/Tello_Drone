@@ -16,7 +16,7 @@ MAP_NAME = "Map"
 INTERVAL = 0.1  # second
 
 ### MAPPING ###
-fSpeed = 15  # 15cm/s
+fSpeed = 25  # 15cm/s
 aSpeed = 50  # 50degrees/s
 zSpeed = 50
 
@@ -36,6 +36,10 @@ COLOR_ORIGIN_POINT = (142, 142, 142)
 ### FACE TRACKING ###
 FACE_SIZE = 6500  # pixels
 FACE_SIZE_RANGE = [6200, 6800]
-PID = [0.3, 0.2, 0]
+PID = [0.5, 0.5, 0]
+
+fSpeed_track = 15  # 15cm/s
+aSpeed_track = 20  # 50degrees/s
+zSpeed_track = 20
 
 

@@ -29,25 +29,24 @@ def findFace(img):
     return center, face_size
 
 
-def trackFace(center, area, pError, img):
+def trackFace(center, area, img, cntrl_pError):
     cx, cy = center
     fb = 0
-    error = cx - img.shape[0] // 2
-    yv = PID[0] * error + PID[1] * (error - pError)
-    yv = int(np.clip(yv, -20, 20))
+    error_lr = cx - img.shape[0] // 2
+    yv = PID[0] * error_lr + PID[1] * (error_lr - cntrl_pError[3])
+    yv = int(np.clip(yv, -fSpeed_track, fSpeed_track))
     if area > FACE_SIZE_RANGE[1]:
         fb = -15
     elif area < FACE_SIZE_RANGE[0]:
         fb = 15
 
-    return pError, [0, fb, 0, yv]
-
+    return [0, 0, 0, error_lr], [0, 0, 0, yv]
 
 # cap = cv2.VideoCapture(0)
-# pError = 0
+# pError_lr = 0
 # while True:
 #     _, img = cap.read()
 #     center, face_size = findFace(img)
-#     pError, _ = trackFace(center, face_size, pError)
+#     pError_lr, _ = trackFace(center, face_size, pError_lr)
 #     cv2.imshow("WebCame", img)
 #     cv2.waitKey(1)

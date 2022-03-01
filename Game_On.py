@@ -16,7 +16,7 @@ lst_tm_img = time.time()
 if STREAM_VIDEO: me.streamon()
 if SHOW_MAP: map_obj = Map()
 tracking = False
-pError = 0
+cntrl_pError = [0, 0, 0, 0]
 
 
 def PowerOF():
@@ -34,7 +34,7 @@ while True:
 
     if tracking and len(key_press) == 0:
         center, face_size = findFace(stream)
-        pError, next_cntrl = trackFace(center, face_size, pError, stream)
+        cntrl_pError, next_cntrl = trackFace(center, face_size, stream, cntrl_pError)
 
     me.send_rc_control(*next_cntrl)
     print(next_cntrl)
@@ -45,7 +45,8 @@ while True:
 
     if SHOW_MAP:  # TODO: change this section so it will show changes in the map also for facetrack
         # TODO: (propably only the func "next_potion" deliover to the func velocity and not key_press
-        map_obj.next_position(key_press)
+        # map_obj.next_position(key_press)
+        map_obj.next_position_test(*next_cntrl)
         map_img = map_obj.drawPoints()
         cv2.imshow(MAP_NAME, map_img)
         cv2.waitKey(1)
@@ -80,8 +81,10 @@ while True:
             map_obj.a = map_obj.yaw = 0
     if "t" in key_press:
         tracking = not tracking
-        if tracking: print("Tracking is ON")
-        else: print("Tracking is OFF")
+        if tracking:
+            print("Tracking is ON")
+        else:
+            print("Tracking is OFF")
         time.sleep(1)
 me.end()
 winwifi.WinWiFi.connect(HOME_WIFI)
