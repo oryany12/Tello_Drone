@@ -85,6 +85,7 @@ while True:
             print("Tracking is ON")
         else:
             print("Tracking is OFF")
+            cntrl_pError = [0, 0, 0, 0]
         time.sleep(1)
 me.end()
 winwifi.WinWiFi.connect(HOME_WIFI)

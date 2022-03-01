@@ -36,10 +36,10 @@ COLOR_ORIGIN_POINT = (142, 142, 142)
 ### FACE TRACKING ###
 FACE_SIZE = 6500  # pixels
 FACE_SIZE_RANGE = [6200, 6800]
-PID = [0.5, 0.5, 0]
+PID = [0.4, 0.4, 0]
 
 fSpeed_track = 15  # 15cm/s
 aSpeed_track = 20  # 50degrees/s
-zSpeed_track = 20
+zSpeed_track = 10
 
 
